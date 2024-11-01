@@ -1,0 +1,124 @@
+body {
+     font-family: "Lato", sans-serif;
+ }
+ .main-head{
+     height: 150px;
+     background: #FFF;
+ }
+ 
+ .sidenav {
+     margin-top:14vh;
+     height: 90vh;
+     background-color: #F9F6F1;
+     overflow-x: hidden;
+     padding-top: 20px;
+ }
+ .sidenav h2 {
+     font-size: 50px;
+     color: #000;
+     font-weight: bold;
+ }
+ 
+ .main {
+     padding: 0px 10px;
+ }
+
+ .login-main-text span{
+     font-size: 12px;
+     font-weight: bold;
+     margin-bottom: 20px;
+ }
+ .login-main-text a {
+     color: #007bff;
+     text-decoration: none;
+     transition: color 0.3s;
+     cursor: pointer;
+     /* display: block; */
+     margin-top: 20px;
+     font-size: 18px;
+ }
+ 
+ @media screen and (max-height: 450px) {
+     .sidenav {padding-top: 15px;}
+ }
+ 
+ @media screen and (max-width: 450px) {
+     .login-form{
+         margin-top: 10%;
+     }
+ 
+     .register-form{
+         margin-top: 10%;
+     }
+ }
+ 
+ @media screen and (min-width: 768px){
+     .main{
+         margin-left: 40%; 
+     }
+ 
+     .sidenav{
+         width: 40%;
+         position: fixed;
+         z-index: 1;
+         top: 0;
+         left: 0;
+     }
+ 
+     .login-form{
+         margin-top: 80%;
+     }
+ 
+     .register-form{
+         margin-top: 20%;
+     }
+ }
+ 
+ 
+ .login-main-text{
+     margin-top: 20%;
+     padding: 60px;
+     color: #000000;
+ }
+ 
+ .login-main-text h2{
+     font-weight: bold;
+ }
+ .login-main-text p{
+     font-weight: bold;
+     font-size: 20px;
+ }
+ 
+ .btn-black{
+     background-color: #000 !important;
+     color: #fff;
+ }
+
+ .login-form {
+     /* border: 1px solid #000 !important; */
+     margin-top: 12%;
+     padding: 20px;
+ }
+ .login-form button {
+     margin-left: 5px;
+     font-size: 18px;
+ }
+ .form-group{
+     padding: 5px;
+ }
+ 
+ .form-group label{
+     font-weight: bold;
+     margin-bottom: 5px;
+     color: #000;
+     font-size: 16px;
+     font-family: "Lato", sans-serif;
+
+ }
+ .form-group input{
+     padding: 20px;
+     /* border: 1px solid #000; */
+     border-radius: 5px;
+     font-size: 16px;
+     font-family:Verdana, Geneva, Tahoma, sans-serif;
+ }
