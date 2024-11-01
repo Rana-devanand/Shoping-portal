@@ -1,0 +1,7 @@
+.testimonial-card {
+     border : 1px solid #ec4444;
+     background-color: antiquewhite;
+}
+.testimonial-slider{
+     display: flex;
+}
