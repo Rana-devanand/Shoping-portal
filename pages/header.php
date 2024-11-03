@@ -66,6 +66,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
     min-width: 150px;
     z-index: 1;
+     
 }
 
 .dropdown-menu a {
@@ -139,14 +140,9 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                          echo "<div class='loggedIn' >
                                    <h2> <b>Welcome " . $_SESSION['username'] . "</b></h2>
                                    <div class='user-icon-container'>
-                                   
-                                   <img src='./assets/img/user.png' alt='User Icon' class='user-icon'>
-
-                                   <div class='dropdown-menu'>
-                                        <a href='./pages/users/profile.php'>Profile</a>
-                                        <a href='settings.php'>Settings</a>
-                                        <a href='./pages/users/logout.php'>Logout</a>
-                                   </div>
+                                   <a href='http://localhost/project/pages/users/profile.php'>
+                                        <img src='http://localhost/project/assets/img/user.png' alt='User Icon' class='user-icon'>
+                                   </a>
                               </div> 
                                 </div>";
                     }
@@ -155,7 +151,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                </div>
           </div>
      </div>
-     <?php include __DIR__ . "/Navbar.php" ?>
+     
 
 
 

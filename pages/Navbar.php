@@ -16,7 +16,16 @@
 
      <link rel="stylesheet" href="../assets/css/header.css">
 </head>
-
+<style>
+     .dropdown-menu{
+          font-size: 1.2rem;
+          color: #fff;
+          border: none;
+          padding: 10px;
+          cursor: pointer;
+          width: 250px;
+     }
+</style>
 <body>
      <div class="row header p-0 m-0">
           <div class="col-3">
@@ -36,19 +45,26 @@
                                         <a class="nav-link active" href="../index.php">Home</a>
                                    </li>
 
-                                   <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="shopDropdown">Shop</a>
-                                        <div class="dropdown-menu">
+                                   <li class="nav-item">
+                                        <a class="nav-link" href="http://localhost/project/pages/allProducts.php" id="shopDropdown">All Products</a>
+                                        <!-- <div class="dropdown-menu">
                                              <a class="dropdown-item" href="#">Shop Item 1</a>
                                              <a class="dropdown-item" href="#">Shop Item 2</a>
-                                        </div>
+                                             <a class="dropdown-item" href="#">Shop Item 2</a>
+                                             <a class="dropdown-item" href="#">Shop Item 2</a>
+                                             <a class="dropdown-item" href="#">Shop Item 2</a>
+                                             <a class="dropdown-item" href="#">Shop Item 2</a>
+                                        </div> -->
                                    </li>
 
                                    <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="productsDropdown">Products</a>
                                         <div class="dropdown-menu">
-                                             <a class="dropdown-item" href="#">Product 1</a>
-                                             <a class="dropdown-item" href="#">Product 2</a>
+                                             <a class="dropdown-item" href="#">Beauty</a>
+                                             <a class="dropdown-item" href="#">fragrances</a>
+                                             <a class="dropdown-item" href="#">furniture</a>
+                                             <a class="dropdown-item" href="#">groceries</a>
+
                                         </div>
                                    </li>
 

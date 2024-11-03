@@ -1,13 +1,7 @@
 *{
      box-sizing: border-box;
 }
-.container-fluid{ 
-     /* padding: 0px; */
-}
 
-.row{
-
-}
 .nav {
      display: flex;
      flex-wrap: wrap;
@@ -74,9 +68,6 @@ a i {
  a i:hover {
      color: #0077b5; /* LinkedIn Blue, for example */
  }
-
-
-
  
 .header{
      background-color: #F9F6F1;

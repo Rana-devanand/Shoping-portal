@@ -16,6 +16,7 @@
      <div class="container-fluid m-0 p-0">
           <?php
           include './pages/header.php';
+          include './pages/Navbar.php';
           ?>
 
           <div class="main">

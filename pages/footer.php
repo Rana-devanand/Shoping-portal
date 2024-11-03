@@ -208,13 +208,13 @@
               <h5> &copy; 2023 Shop Online. All rights reserved.</h5>
 
                <div class="payment-method">
-                    <img src="./assets/img/payment/card.png" alt="PayPal">
+                    <img src="http://localhost/project/assets/img/payment/card.png" alt="PayPal">
 
-                    <img src="./assets/img/payment/money.png" alt="MasterCard">
+                    <img src="http://localhost/project/assets/img/payment/money.png" alt="MasterCard">
 
-                    <img src="./assets/img/payment/symbols.png" alt="Visa">
+                    <img src="http://localhost/project/assets/img/payment/symbols.png" alt="Visa">
 
-                    <img src="./assets/img/payment/america.png" alt="american card">
+                    <img src="http://localhost/project/assets/img/payment/america.png" alt="american card">
                </div>
           </div>
      </div>

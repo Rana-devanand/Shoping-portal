@@ -1,113 +1,54 @@
-const pink = document.getElementById('pink');
-const originalImageSrc = './assets/img/orange-1.jpg';
-const hoverImageSrc = './assets/img/white-1.jpg';
-
-pink.addEventListener('mouseenter', () => {
-  pink.src = hoverImageSrc;
-});
-
-pink.addEventListener('mouseleave', () => {
-  pink.src = originalImageSrc;
-});
+const url = 'https://dummyjson.com/products'; // Replace with the API's actual endpoint
 
 
-// purple
-const purple = document.getElementById('purple');
-const purpleImageSrc = './assets/img/purple.jpg';
-const HoverPurpleIMg = './assets/img/pink-1.jpg';
+// Function to fetch phone details
+async function fetchPhoneDetails() {
+    try {
+        const response = await fetch(url);
+        
+        // Check if response is ok (status 200-299)
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
+        }
+        
+        const data = await response.json(); // Parse JSON response
+        console.log(data.products); // Log data or handle it as needed
+        const products = data.products;
+        displayPhoneData(products); // Call function to display data on your web page
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
 
-purple.addEventListener('mouseenter', () => {
-  purple.src = HoverPurpleIMg;
-});
+function displayPhoneData(data) {
+     const phoneContainer = document.getElementById('phone-container'); // Ensure you have an element with this ID in your HTML
+     
+     // Clear any previous content to avoid duplicating items if the function is called multiple times
+     phoneContainer.innerHTML = '';
+ 
+     for (let i = 0; i < data.length; i++) {
+         let phone = data[i];
+         
+         // Create a new element for each phone item
+         let phoneItem = document.createElement('div');
+         phoneItem.classList.add('phone-item');
+         
+         // Populate the phone item with data
+         phoneItem.innerHTML = `
+             <h2>${phone.title}</h2>
+             <img src="" alt="${phone.name}">
+             <p>${phone.category}</p>
+             <p>${phone.description}</p>
+             <p>Price: ${phone.price}</p>
+            
+         `;
+         
+         // Append the newly created phone item to the container
+         phoneContainer.appendChild(phoneItem);
+     }
+ }
+ 
+ 
 
-purple.addEventListener('mouseleave', () => {
-  purple.src = purpleImageSrc;
-});
-
-
-// White
-const white = document.getElementById('white');
-const whiteImageSrc = './assets/img/white-3.jpg';
-const HoverWhiteIMg = './assets/img/white-4.jpg';
-
-white.addEventListener('mouseenter', () => {
-  white.src = HoverWhiteIMg;
-});
-
-white.addEventListener('mouseleave', () => {
-  white.src = whiteImageSrc;
-});
-
-
-// brown 
-const brown = document.getElementById('brown');
-
-const brownImageSrc = './assets/img/brown.jpg';
-const HoverbrownIMg = './assets/img/white-2.jpg';
-
-brown.addEventListener('mouseenter', () => {
-  brown.src = HoverbrownIMg;
-});
-
-brown.addEventListener('mouseleave', () => {
-  brown.src = brownImageSrc;
-});
-
-
-//  brown-2 
-const brown2 = document.getElementById('brown-2');
-
-const brown2ImageSrc = './assets/img/brown-2.jpg';
-const Hoverbrown2IMg = './assets/img/brown-3.jpg';
-
-brown2.addEventListener('mouseenter', () => {
-  brown2.src = Hoverbrown2IMg;
-});
-
-brown2.addEventListener('mouseleave', () => {
-  brown2.src = brown2ImageSrc;
-});
-
-//  black
-const black = document.getElementById('black');
-
-const blackImageSrc = './assets/img/black-4.jpg';
-const HoverblackIMg = './assets/img/black-5.jpg';
-
-black.addEventListener('mouseenter', () => {
-  black.src = HoverblackIMg;
-});
-
-black.addEventListener('mouseleave', () => {
-  black.src = blackImageSrc;
-});
-
-
-// white-2
-
-const white2 = document.getElementById('white-2');
-
-const white2ImageSrc = './assets/img/white-8.jpg';
-const Hoverwhite2IMg = './assets/img/black-6.jpg';
-
-white2.addEventListener('mouseenter', () => {
-  white2.src = Hoverwhite2IMg;
-});
-
-white2.addEventListener('mouseleave', () => {
-  white2.src = white2ImageSrc;
-});
-
-//  light-green-1
-const lightGreen = document.getElementById('light-green');
-
-const lightGreenImageSrc = './assets/img/light-green-1.jpg';
-const HoverlightGreenIMg = './assets/img/light-green-2.jpg';
-
-lightGreen.addEventListener('mouseenter', () => {
-  lightGreen.src = HoverlightGreenIMg;
-});
-
-lightGreen.addEventListener('mouseleave', () => {
-  lightGreen.src = lightGreenImageSrc;
-});
+// Call the function to fetch phone details
+fetchPhoneDetails();
