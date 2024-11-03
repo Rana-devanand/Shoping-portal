@@ -1,3 +1,38 @@
+
+<?php
+  include_once "../Database/connectivity.php";
+     if(isset($_POST['submit'])){
+          $name = $_POST['name'];
+          $email = $_POST['email'];
+          $phone = $_POST['phone'];
+          $password = $_POST['password'];
+
+          $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+         
+          // Your email address and password for sending emails
+          if(!empty($email) && !empty($password) && !empty($phone) && !empty($name)) {
+               $query = "INSERT INTO `users` (`username`, `phone`, `email`, `password`) 
+                    VALUES ('$name','$phone','$email' , '$hashed_password')"; 
+
+               $result = mysqli_query($conn, $query);
+               
+               if($result){
+                    echo "<script>alert('User Registered Successfully')</script>";
+                    header('Location:./Login.php'); 
+               } else {
+                    echo "<script>alert('Failed to Register')</script>";
+                    header('Location:./Register.php'); 
+               }
+          }
+          else{
+                echo "<script>alert('Please fill all the fields')</script>";
+                header('Location:./Register.php');
+          }
+
+     }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,24 +71,24 @@
      <div class="main">
           <div class="col-md-6 col-sm-12">
                <div class="login-form">
-                    <form>
+                    <form action="Register.php" method="POST"> 
                          <div class="form-group">
                               <label>User Name</label>
-                              <input type="text" class="form-control" placeholder="User Name">
+                              <input type="text" class="form-control" name="name" placeholder="User Name">
                          </div>
                          <div class="form-group">
                               <label>Phone</label>
-                              <input type="text" class="form-control" placeholder="User Phone">
+                              <input type="text" class="form-control" name="phone" placeholder="User Phone">
                          </div>
                          <div class="form-group">
                               <label>Email</label>
-                              <input type="email" class="form-control" placeholder="User Email">
+                              <input type="email" class="form-control" name="email" placeholder="User Email">
                          </div>
                          <div class="form-group">
                               <label>Password</label>
-                              <input type="password" class="form-control" placeholder="Password">
+                              <input type="password" class="form-control" name="password" placeholder="Password">
                          </div>
-                         <button type="submit" class="btn btn-lg btn-success">Signup</button>
+                         <button type="submit" name="submit" value="submit" class="btn btn-lg btn-success">Signup</button>
                     </form>
 
                </div>

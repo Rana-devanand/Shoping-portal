@@ -1,3 +1,16 @@
+<?php
+
+$userNotLoggedIn = true;
+session_start();
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+     // header("Location: login.php");
+     // exit();
+} else {
+     $userNotLoggedIn = false;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,6 +25,71 @@
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+<style>
+     .loggedIn{
+          display: flex;
+          align-items: center;
+          justify-content: right;
+          /* border: 1px solid #000; */
+          gap: 15px;
+          margin-right: 50px;
+     }
+     .loggedIn span {
+          font-size: 20px;
+          border: 1px solid #ddd;
+          padding: 10px 12px;
+          border-radius: 50%;
+     }
+     /* Usericon */
+     /* Basic styling for user icon */
+.user-icon-container {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.user-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%; /* Make the icon circular */
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50px; /* Adjust as needed */
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 150px;
+    z-index: 1;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f2f2f2;
+}
+
+/* Show dropdown on hover */
+.user-icon-container:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu.show {
+    display: block;
+}
+
+</style>
 
 <body>
      <div class="container-fluid">
@@ -44,20 +122,62 @@
                     </div>
                </div>
                <div class="col-4 Register">
-                    <a href="./pages/Login.php">
-                         <button class="btn btn-lg btn-primary"> Login </button>
-                    </a>
-                    <a href="./pages/Register.php">
-                         <button class="btn btn-lg btn-primary">Register</button>
-                    </a>
+                    <?php
+                    if (!isset($_SESSION['loggedIn'])) {
+                         if ($userNotLoggedIn) {
+                              echo ' <a href="./pages/Login.php">
+                                     <button class="btn btn-lg btn-primary"> Login </button>
+                                   </a>
+                                   <a href="./pages/Register.php">
+                                        <button class="btn btn-lg btn-primary">Register</button>
+                                   </a>
+                                   '
+                              ;
+                         } 
+                    }
+                    else {
+                         echo "<div class='loggedIn' >
+                                   <h2> <b>Welcome " . $_SESSION['username'] . "</b></h2>
+                                   <div class='user-icon-container'>
+                                   
+                                   <img src='./assets/img/user.png' alt='User Icon' class='user-icon'>
+
+                                   <div class='dropdown-menu'>
+                                        <a href='./pages/users/profile.php'>Profile</a>
+                                        <a href='settings.php'>Settings</a>
+                                        <a href='./pages/users/logout.php'>Logout</a>
+                                   </div>
+                              </div> 
+                                </div>";
+                    }
+
+                    ?>
                </div>
           </div>
      </div>
-     <?php include __DIR__. "/Navbar.php" ?>
-     
+     <?php include __DIR__ . "/Navbar.php" ?>
+
 
 
 </body>
+<script>
+     document.addEventListener("DOMContentLoaded", function() {
+    const userIconContainer = document.querySelector('.user-icon-container');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    userIconContainer.addEventListener('click', function() {
+        dropdownMenu.classList.toggle('show');
+    });
+
+    // Close the dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+        if (!userIconContainer.contains(event.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+});
+
+</script>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

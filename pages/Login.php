@@ -1,3 +1,44 @@
+<?php
+
+     session_start();
+     include_once "../Database/connectivity.php";
+     if (isset($_POST['submit'])) {
+         $email = $_POST['email'];
+         $password = $_POST['password'];
+          
+         echo $email;
+         echo $password;
+
+         if (!empty($email) && !empty($password)) {
+             $query = "SELECT * FROM `users` WHERE email = '$email'";
+             $result = mysqli_query($conn, $query);
+
+             if (mysqli_num_rows($result) > 0) {
+
+               $user = mysqli_fetch_assoc($result);
+               $hashedPassword = $user['password'];  
+                    if (password_verify($password, $hashedPassword)) {
+
+                         $_SESSION['loggedIn'] = true;
+                         $_SESSION['email'] = $user['email'];  // Optionally store user email
+                         $_SESSION['username'] = $user['username']; // Optionally store user username
+
+                     echo "<script>alert('User Logged In Successfully')</script>";
+                     header("Location: ../index.php");
+                     exit;
+                 } else {
+                    echo "Incorrect password!";
+                 }
+             } else {
+                 echo "User not found!";
+             }
+         } else {
+             echo "Please enter both email and password.";
+         }
+     }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,18 +77,17 @@
      <div class="main">
           <div class="col-md-6 col-sm-12">
                <div class="login-form">
-                    <form>
+                    <form action="Login.php" method="POST">
                          <div class="form-group">
                               <label>User Name</label>
-                              <input type="text" class="form-control" placeholder="User Name">
+                              <input type="text" class="form-control" name="email" placeholder="User Email">
                          </div>
                          <div class="form-group">
                               <label>Password</label>
-                              <input type="password" class="form-control" placeholder="Password">
+                              <input type="password" class="form-control" name="password" placeholder="User Password">
                          </div>
-                         <button type="submit" class="btn btn-lg btn-success">Login</button>
+                         <button type="submit" name="submit" value="submit" class="btn btn-lg btn-success">Login</button>
                     </form>
-
                </div>
           </div>
      </div>
