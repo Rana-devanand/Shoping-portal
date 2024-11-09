@@ -65,7 +65,7 @@
                                         <span class="fa fa-star checked"></span>
                                    </div>
                                    <div class="card card-body">
-                                        <img class="img-fluid" src="http://placehold.it/380?text=1">
+                                        <img class="img-fluid" src="http://localhost/project/assets/img/testimonials/t1.webp">
                                    </div>
                                    <div class="name">
                                         <h4>John Doe</h4>
@@ -83,7 +83,7 @@
 
                                    </div>
                                    <div class="card card-body">
-                                        <img class="img-fluid" src="http://placehold.it/380?text=2">
+                                        <img class="img-fluid" src="http://localhost/project/assets/img/testimonials/t2.jpeg">
                                    </div>
                                    <div class="name">
                                         <h4>John Doe</h4>
@@ -101,7 +101,7 @@
 
                                    </div>
                                    <div class="card card-body">
-                                        <img class="img-fluid" src="http://placehold.it/380?text=3">
+                                        <img class="img-fluid" src="http://localhost/project/assets/img/testimonials/t3.jpg" alt="miss">
                                    </div>
                                    <div class="name">
                                         <h4>John Doe</h4>
@@ -119,7 +119,7 @@
 
                                    </div>
                                    <div class="card card-body">
-                                        <img class="img-fluid" src="http://placehold.it/380?text=4">
+                                        <img class="img-fluid" src="http://localhost/project/assets/img/testimonials/t5.jpg">
                                    </div>
                                    <div class="name">
                                         <h4>John Doe</h4>
@@ -137,7 +137,7 @@
 
                                    </div>
                                    <div class="card card-body">
-                                        <img class="img-fluid" src="http://placehold.it/380?text=5">
+                                        <img class="img-fluid" src="http://localhost/project/assets/img/testimonials/t6.jpg">
                                    </div>
                                    <div class="name">
                                         <h4>John Doe</h4>
@@ -155,7 +155,7 @@
 
                                    </div>
                                    <div class="card card-body">
-                                        <img class="img-fluid" src="http://placehold.it/380?text=6">
+                                        <img class="img-fluid" src="http://localhost/project/assets/img/testimonials/t4.jpg">
                                    </div>
                                    <div class="name">
                                         <h4>John Doe</h4>
@@ -180,7 +180,7 @@
 
      <script>
           $('#recipeCarousel').carousel({
-               interval: 2000
+               interval: 100
           })
 
           $('.carousel .carousel-item').each(function () {

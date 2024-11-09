@@ -72,13 +72,19 @@
     color: #2c8f2c;
 }
 
+.loader {
+    width: 100%;
+    height:500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 </style>
 <body>
-     <?php include "./header.php";
-          ?>
+     <?php include "./header.php"; ?>
 
-     <?php include "./Navbar.php";
-     ?>
+     <?php include "./Navbar.php"; ?>
       <div id="phone-container" class="phone-container">
      
      </div>
@@ -91,22 +97,30 @@
 
 // Function to fetch phone details
 async function fetchPhoneDetails() {
+    const phoneContainer = document.getElementById('phone-container');
+    
+    // Set loading message before making the fetch request
+    phoneContainer.innerHTML = 
+    // spinner-border text-primary" role="status
+    `
+     <div class="loader">
+            <img src="http://localhost/project/assets/img/loader/loading.svg" alt=""/>
+     </div>
+    `;
+
     try {
         const response = await fetch(url);
-        
-        // Check if response is ok (status 200-299)
         if (!response.ok) {
             throw new Error(`Error: ${response.status}`);
         }
-        
-        const data = await response.json(); // Parse JSON response
-        console.log(data.products); // Log data or handle it as needed
+        const data = await response.json(); 
         const products = data.products;
-        displayPhoneData(products); // Call function to display data on your web page
+        displayPhoneData(products); 
     } catch (error) {
         console.error('Error fetching data:', error);
     }
 }
+
 
 function displayPhoneData(data) {
      const phoneContainer = document.getElementById('phone-container'); // Ensure you have an element with this ID in your HTML
@@ -129,7 +143,7 @@ function displayPhoneData(data) {
              <p>${phone.description}</p>
              <p>Price: ${phone.price}</p>
              <hr>
-             <button class="btn btn-lg btn-primary">Add to Cart</button>  &nbsp;
+             <button class="btn btn-lg btn-primary">Add to Cart</button>  &nbsp; &nbsp;
              <button class="more-details btn btn-lg btn-warning" data-id="${phone.id}">More details</button> 
                
          `;

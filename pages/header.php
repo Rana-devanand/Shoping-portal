@@ -126,10 +126,10 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                     <?php
                     if (!isset($_SESSION['loggedIn'])) {
                          if ($userNotLoggedIn) {
-                              echo ' <a href="./pages/Login.php">
+                              echo ' <a href="http://localhost/project/pages/Login.php">
                                      <button class="btn btn-lg btn-primary"> Login </button>
                                    </a>
-                                   <a href="./pages/Register.php">
+                                   <a href="http://localhost/project/pages/Register.php">
                                         <button class="btn btn-lg btn-primary">Register</button>
                                    </a>
                                    '
