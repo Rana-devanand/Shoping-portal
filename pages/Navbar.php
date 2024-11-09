@@ -17,7 +17,7 @@
      <link rel="stylesheet" href="../assets/css/header.css">
 </head>
 <style>
-     .dropdown-menu{
+     .dropdown-menu {
           font-size: 1.2rem;
           color: #fff;
           border: none;
@@ -26,6 +26,7 @@
           width: 250px;
      }
 </style>
+
 <body>
      <div class="row header p-0 m-0">
           <div class="col-3">
@@ -46,7 +47,8 @@
                                    </li>
 
                                    <li class="nav-item">
-                                        <a class="nav-link" href="http://localhost/project/pages/allProducts.php" id="shopDropdown">All Products</a>
+                                        <a class="nav-link" href="http://localhost/project/pages/allProducts.php"
+                                             id="shopDropdown">All Products</a>
                                         <!-- <div class="dropdown-menu">
                                              <a class="dropdown-item" href="#">Shop Item 1</a>
                                              <a class="dropdown-item" href="#">Shop Item 2</a>
@@ -60,11 +62,17 @@
                                    <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="productsDropdown">Products</a>
                                         <div class="dropdown-menu">
-                                             <a class="dropdown-item" href="#">Beauty</a>
-                                             <a class="dropdown-item" href="#">fragrances</a>
-                                             <a class="dropdown-item" href="#">furniture</a>
-                                             <a class="dropdown-item" href="#">groceries</a>
+                                             <a class="dropdown-item"
+                                                 href="http://localhost/project/pages/Product.php?category=electronics">electronics</a>
 
+                                             <a class="dropdown-item" 
+                                                  href="http://localhost/project/pages/Product.php?category=jewelery">jewelery</a>
+
+                                             <a class="dropdown-item" 
+                                                  href="http://localhost/project/pages/Product.php?category=men's clothing">men's clothing</a>
+
+                                             <a class="dropdown-item"
+                                                  href="http://localhost/project/pages/Product.php?category=women's clothing">women's clothing</a>
                                         </div>
                                    </li>
 
@@ -107,6 +115,22 @@
                </a>
           </div>
      </div>
+
+     <!-- <script>
+
+          const fetchData = async (data) => {
+               console.log(data);
+               const URL = `https://fakestoreapi.com/products/category/${data}`;
+               try {
+                    const response = await fetch(URL);
+                    const data = await response.json(); 
+                    console.log(data);
+               } catch (error) {
+                    console.log(error);
+               }
+          }
+
+     </script> -->
 
 </body>
 
