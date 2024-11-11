@@ -16,12 +16,13 @@
              if (mysqli_num_rows($result) > 0) {
 
                $user = mysqli_fetch_assoc($result);
+              
+
                $hashedPassword = $user['password'];  
                     if (password_verify($password, $hashedPassword)) {
-
+                        
                          $_SESSION['loggedIn'] = true;
-                         $_SESSION['email'] = $user['email'];  // Optionally store user email
-                         $_SESSION['username'] = $user['username']; // Optionally store user username
+                         $_SESSION['id'] = $user['id'];                            
 
                      echo "<script>alert('User Logged In Successfully')</script>";
                      header("Location: ../index.php");

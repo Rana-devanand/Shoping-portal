@@ -179,7 +179,9 @@
           <!-- Main Content -->
           <div class="content" id="content">
                <h5>Welcome</h5>
-               <h2><?php echo "" . $_SESSION["username"] . "" ?></h2>
+               <h2><?php echo "" . $_SESSION["id"] . "" ?></h2>
+               <h6>UserId : <?php echo "" . $_SESSION["id"] . "" ?></h6>
+
 
                <div class="box">
                     <div class="box-size">

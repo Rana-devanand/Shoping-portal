@@ -23,7 +23,7 @@ session_start();
                     </div>
                     <div class="user-detail">
                          <!-- <p>Welcome</p> -->
-                         <h3><?php echo "". $_SESSION["username"] ."" ?></h3>
+                         <h3><?php echo "". $_SESSION["id"] ."" ?></h3>
                     </div>
 
                </div>

@@ -138,7 +138,7 @@ if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
                     }
                     else {
                          echo "<div class='loggedIn' >
-                                   <h2> <b>Welcome " . $_SESSION['username'] . "</b></h2>
+                                   <h2> <b>Welcome " . $_SESSION['id'] . "</b></h2>
                                    <div class='user-icon-container'>
                                    <a href='http://localhost/project/pages/users/profile.php'>
                                         <img src='http://localhost/project/assets/img/user.png' alt='User Icon' class='user-icon'>
