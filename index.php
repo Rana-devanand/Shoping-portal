@@ -15,6 +15,7 @@
 <body>
      <div class="container-fluid m-0 p-0">
           <?php
+          include_once "./Database/connectivity.php";
           include './pages/header.php';
           include './pages/Navbar.php';
           ?>

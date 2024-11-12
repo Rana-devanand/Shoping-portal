@@ -60,6 +60,9 @@
 
 
 <body>
+     <?php 
+      include_once "../Database/connectivity.php";
+     ?>
      <?php include "./header.php"; ?>
 
      <?php include "./Navbar.php"; ?>

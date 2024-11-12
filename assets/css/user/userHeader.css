@@ -6,10 +6,9 @@ body{
 .nav{
      width: 100%;
      background-color: #F1F1F1;
-     height: 100px;
+     height: 100px;     
      display: flex;
      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-     
 }
 
 .navbar{
@@ -40,7 +39,7 @@ body{
 }
 .user-icon img{
      width: 100%;
-     height: 100%;
+     /* height: 100%; */
 }
 
 .other a{
@@ -48,7 +47,7 @@ body{
      height: 80px;
      align-items: center;
      justify-content: center;
-     padding: 0 20px;
+     padding: 10px 20px;
      text-decoration: none;
      color: #464646;
      transition: color 0.3s;

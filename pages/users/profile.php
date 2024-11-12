@@ -12,6 +12,7 @@
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
      <title>Sidebar with Dynamic Content</title>
+     <link rel="stylesheet" href="http://localhost/project/assets/css/user/profile.css">
      <style>
           /* Basic reset and styling */
           * {
@@ -34,7 +35,7 @@
           /* Sidebar styling */
           .sidebar {
                width: 250px;
-               height: 100vh;
+               height: 545px;
                /* Full viewport height */
                background-color: #333;
                color: white;
@@ -99,19 +100,24 @@
                cursor: pointer;
                text-align: start;
           }
-          .wishlist{
+
+          .wishlist {
                background-color: #17A2B8;
           }
-          .cart{
+
+          .cart {
                background-color: #28A745;
           }
-          .order{
+
+          .order {
                background-color: #FFC107;
           }
-          .cancel{
+
+          .cancel {
                background-color: #DC3545;
           }
-          .account{
+
+          .account {
                background-color: #343A40;
           }
 
@@ -144,11 +150,69 @@
                margin-left: 35px;
                opacity: 0.3;
           }
+          .remove_cart{
+               background-color: #28A745;
+          }
+         
      </style>
 </head>
 
 <body>
      <?php include "./userHeader.php" ?>
+     <?php
+     // Database connection
+     include_once "../../Database/connectivity.php";
+     if (isset($_SESSION['id'])) {
+          $id = $_SESSION['id'];
+          $query = "SELECT * from `users` where `id` = '$id'";
+          $result = mysqli_query($conn, $query);
+          if (mysqli_num_rows($result) > 0) {
+               while ($row = mysqli_fetch_assoc($result)) {
+                    $user = $row['username'];
+                    $phone = $row['phone'];
+                    $email = $row['email'];
+               }
+          } else {
+               echo "No user found";
+          }
+     }
+
+     if (isset($_SESSION['id'])) {
+          $id = $_SESSION['id'];
+
+          $wishlistArray = [];
+          $cartArray = [];
+
+          $query = "SELECT DISTINCT `cart_id` FROM `user_cart` WHERE `userid` = '$id'";
+          $result = mysqli_query($conn, $query);
+          $totalCart = mysqli_num_rows($result);
+          if ($totalCart > 0) {
+               while ($row = mysqli_fetch_array($result)) {
+                    $cartArray[] = $row['cart_id'];
+               }
+          } else {
+               echo "No items in your Cart.";
+          }
+          echo "<script>const userCartlist = " . json_encode($cartArray) . ";</script>";
+
+
+
+          $wishlist_query = "SELECT DISTINCT `Wishlist_id` FROM `users_wishlist` WHERE `userid` = '$id'";
+          $wishlist_result = mysqli_query($conn, $wishlist_query);
+          $totalWishlist = mysqli_num_rows($wishlist_result);
+          if ($totalWishlist > 0) {
+               while ($row = mysqli_fetch_array($wishlist_result)) {
+                    $wishlistArray[] = $row['Wishlist_id'];
+               }
+          } else {
+               echo "No items in your wishlist.";
+          }
+          echo "<script>const userWishlist = " . json_encode($wishlistArray) . ";</script>";
+
+
+     }
+
+     ?>
      <div class="profile">
           <!-- Sidebar -->
           <div class="sidebar">
@@ -159,10 +223,10 @@
                </div>
 
                <div class="my-wishlist">
-                    <a onclick="showContent('section1')"><i class="fas fa-heart">&nbsp;&nbsp;</i> My wishlist</a>
+                    <a onclick="showContent('wishlist')"><i class="fas fa-heart">&nbsp;&nbsp;</i> My wishlist</a>
                </div>
                <div class="my-cart">
-                    <a onclick="showContent('section2')"><i class="fas fa-shopping-cart">&nbsp;&nbsp;</i>My cart</a>
+                    <a onclick="showContent('cart')"><i class="fas fa-shopping-cart">&nbsp;&nbsp;</i>My cart</a>
                </div>
 
                <div class="My orders">
@@ -178,9 +242,9 @@
 
           <!-- Main Content -->
           <div class="content" id="content">
-               <h5>Welcome</h5>
-               <h2><?php echo "" . $_SESSION["id"] . "" ?></h2>
-               <h6>UserId : <?php echo "" . $_SESSION["id"] . "" ?></h6>
+               <span><b>Welcome</b></span>
+               <span><b><?php echo $user ?></b></span><br />
+               <h6>Email : <?php echo $email ?></h6>
 
 
                <div class="box">
@@ -188,7 +252,7 @@
                          <a href="#">
                               <div class="wishlist box-container">
                                    <div class="box-detail">
-                                        <h4>4</h4>
+                                        <h4><?php echo $totalWishlist ?></h4>
                                         <p>Total wishlist</p>
                                    </div>
                                    <div class="icon">
@@ -203,7 +267,7 @@
                          <a href="#">
                               <div class="order box-container">
                                    <div class="box-detail">
-                                        <h4>10</h4>
+                                        <h4>0</h4>
                                         <p>Total Order</p>
                                    </div>
                                    <div class="icon">
@@ -218,7 +282,7 @@
                          <a href="#">
                               <div class="cart box-container">
                                    <div class="box-detail">
-                                        <h4>15</h4>
+                                        <h4><?php echo $totalCart ?></h4>
                                         <p>Total Cart</p>
                                    </div>
                                    <div class="icon">
@@ -232,7 +296,7 @@
                          <a href="#">
                               <div class="cancel box-container">
                                    <div class="box-detail">
-                                        <h4>3</h4>
+                                        <h4>0</h4>
                                         <p>Total cancellation</p>
                                    </div>
                                    <div class="icon">
@@ -257,9 +321,12 @@
                     </div>
                </div>
           </div>
+
+
      </div>
 
      <script>
+
           // JavaScript function to display content based on sidebar section clicked
           function showContent(section) {
                const contentDiv = document.getElementById('content');
@@ -273,7 +340,7 @@
                          <a href="#">
                               <div class="wishlist box-container">
                                    <div class="box-detail">
-                                        <h4>4</h4>
+                                        <h4><?php echo $totalWishlist ?></h4>
                                         <p>Total wishlist</p>
                                    </div>
                                    <div class="icon">
@@ -288,7 +355,7 @@
                          <a href="#">
                               <div class="order box-container">
                                    <div class="box-detail">
-                                        <h4>10</h4>
+                                        <h4>0</h4>
                                         <p>Total Order</p>
                                    </div>
                                    <div class="icon">
@@ -303,7 +370,7 @@
                          <a href="#">
                               <div class="cart box-container">
                                    <div class="box-detail">
-                                        <h4>15</h4>
+                                        <h4><?php echo $totalCart ?></h4>
                                         <p>Total Cart</p>
                                    </div>
                                    <div class="icon">
@@ -317,7 +384,7 @@
                          <a href="#">
                               <div class="cancel box-container">
                                    <div class="box-detail">
-                                        <h4>3</h4>
+                                        <h4>0</h4>
                                         <p>Total cancellation</p>
                                    </div>
                                    <div class="icon">
@@ -343,17 +410,142 @@
                </div>
                     
                 `;
-               } else if (section === 'section2') {
-                    contentHTML = `
-                    <h1>My Cart</h1>
-                    <p>This is the content for Section 2. It is displayed when you click on the "Section 2" link in the sidebar.</p>
-                `;
                }
-               else if (section === 'section3') {
-                    contentHTML = `
-                    <h1>My orders</h1>
-                    <p>This is the content for Section 2. It is displayed when you click on the "Section 2" link in the sidebar.</p>
-                `;
+               else if (section === 'wishlist') {
+                    const url = 'https://dummyjson.com/products';
+
+                    async function fetchPhoneDetails() {
+                         // const contentDiv = document.getElementById('phone-container');
+                         contentHTML = `
+                              <div class="loader">
+                                   <img src="http://localhost/project/assets/img/loader/loading.svg" alt=""/>
+                              </div>
+                         `;
+
+                         try {
+                              const response = await fetch(url);
+                              if (!response.ok) {
+                                   throw new Error(`Error: ${response.status}`);
+                              }
+                              const data = await response.json();
+                              const products = data.products;
+                              displayPhoneData(products);
+                         } catch (error) {
+                              console.error('Error fetching data:', error);
+                         }
+                    }
+
+
+                    function displayPhoneData(data) {
+                         const contentDiv = document.getElementById('content');
+                         contentDiv.innerHTML = '<h4>Your Wishlist :  </h4>';
+
+                         // Filter data to only include items that are in the wishlist
+                         const userCartList = data.filter(phone => userWishlist.includes(phone.id.toString()));
+
+                         // Iterate over the filtered data and build HTML
+                         userCartList.forEach(phone => {
+                              // Construct HTML for each phone item that is wishlisted
+                              const phoneItemHTML = `
+                              <div class="wishlist_data">
+                                   <div class="phone-item">
+                                        <h2>${phone.title}</h2>
+                                        <div class="wishlist-status">Wishlisted</div>
+                                        <img src="${phone.images[0]}" alt="${phone.name}">
+                                        <h4>${phone.category}</h4>
+                                        <p>${phone.description}</p>
+                                        <p>Price: ${phone.price}</p>
+
+                                        <form action="" method="POST">
+                                             <div class="order" style="color:#fff;">
+                                                  <button type="button" class="wishlist btn">
+                                                       Place Order
+                                                       <i class="fas fa-shopping-bag"></i>
+                                                  </button>
+                                              </div>  
+                                              
+                                              <div class="order" style="background-color:pink ; color:blue; margin-top:2px">
+                                                  <button type="button" class="wishlist btn">
+                                                      Remove Wishlist
+                                                       <i class="fas fa-heart"></i>
+                                                  </button>
+                                              </div>  
+                                        </form>
+                                   </div>
+                              </div>
+                                  `;
+
+                              contentDiv.innerHTML += phoneItemHTML;
+                         });
+                    }
+                    fetchPhoneDetails();
+               }
+               else if (section === 'cart') {
+                    const url = 'https://dummyjson.com/products';
+
+                    async function fetchPhoneDetails() {
+                         // const contentDiv = document.getElementById('phone-container');
+                         contentHTML = `
+                                   <div class="loader">
+                                        <img src="http://localhost/project/assets/img/loader/loading.svg" alt=""/>
+                                   </div>
+                              `;
+                         try {
+                              const response = await fetch(url);
+                              if (!response.ok) {
+                                   throw new Error(`Error: ${response.status}`);
+                              }
+                              const data = await response.json();
+                              const products = data.products;
+                              displayPhoneData(products);
+                         } catch (error) {
+                              console.error('Error fetching data:', error);
+                         }
+                    }
+
+
+                    function displayPhoneData(data) {
+                         const contentDiv = document.getElementById('content');
+                         contentDiv.innerHTML = '<h4>Your Cart Product :  </h4>';
+
+                         // Filter data to only include items that are in the wishlist
+                         const userCartList = data.filter(phone => userCartlist.includes(phone.id.toString()));
+
+                         // Iterate over the filtered data and build HTML
+                         userCartList.forEach(phone => {
+                              // Construct HTML for each phone item that is wishlisted
+                              const phoneItemHTML = `
+                              <div class="wishlist_data">
+                                   <div class="phone-item">
+                                        <h2>${phone.title}</h2>
+                                        <img src="${phone.images[0]}" alt="${phone.name}">
+                                        <h4>${phone.category}</h4>
+                                        <p>${phone.description}</p>
+                                        <p>Price: ${phone.price}</p>
+                                        <form action="" method="POST">
+                                             <div class="order" style="color:#fff;">
+                                                  <button type="button" class="wishlist btn">
+                                                       Place Order
+                                                       <i class="fas fa-shopping-bag"></i>
+                                                  </button>
+                                              </div>  
+                                              
+                                              <div class="order" style="background-color:red ; color:#fff; margin-top:2px">
+                                                  <button type="button" class="wishlist btn">
+                                                      Remove cart
+                                                       <i class="fa fa-shopping-cart"></i>
+                                                  </button>
+                                              </div>  
+                                        </form>
+                                   </div>
+                                   
+                              </div>
+                              `;
+
+                              contentDiv.innerHTML += phoneItemHTML;
+                         });
+                    }
+                    fetchPhoneDetails();
                } else if (section === 'section4') {
                     contentHTML = `
                     <h1>Section 3</h1>
@@ -364,6 +556,20 @@
                // Update the content area with the selected section's content
                contentDiv.innerHTML = contentHTML;
           }
+
+
+          // Get the query parameters from the URL
+          const urlParams = new URLSearchParams(window.location.search);
+
+          // Get the value of the 'category' parameter
+          const category = urlParams.get('data');
+          if (category === 'wishlist') {
+               showContent('wishlist');
+          }
+          else if(category === 'cart'){
+               showContent('cart');
+          }
+
      </script>
 
 </body>

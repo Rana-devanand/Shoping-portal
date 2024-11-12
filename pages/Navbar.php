@@ -25,6 +25,45 @@
           cursor: pointer;
           width: 250px;
      }
+
+     .totalCart {
+          position: absolute;
+          right: 58px;
+          top: 88px;
+          font-size: 18px;
+          color: red;
+          /* border-radius: 50%; */
+          /* padding: 5px; */
+          cursor: pointer;
+          font-weight: 800;
+          /* background-color: red; */
+          font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     }
+     .totalWish{
+          position: absolute;
+          right: 105px;
+          top: 82px;
+          font-size: 18px;
+          color: red;
+          border-radius: 50%;
+          padding: 5px;
+          cursor: pointer;
+          font-weight: 800;
+          font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+
+     }
+     .bell{
+          position: absolute;
+          right: 150px;
+          top: 80px;
+          font-size: 18px;
+          color: red;
+          border-radius: 50%;
+          padding: 5px;
+          cursor: pointer;
+          font-weight: 800;
+          font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+     }
 </style>
 
 <body>
@@ -98,21 +137,68 @@
                </nav>
           </div>
           <div class="col-3 notification">
-               <a href="#">
-                    <span class="fa fa-bell"></span>
-               </a>
+<?php
 
-               <a href="#">
-                    <span class="fa fa-shopping-cart"></span>
-               </a>
+$userNotLoggedIn = true;
+if (!isset($_SESSION['loggedIn']) || $_SESSION['loggedIn'] !== true) {
+     // header("Location: login.php");
+     // exit();
+} else {
+     $userNotLoggedIn = false;
+}
+          ?>
+          <?php
 
-               <a href="#">
-                    <span class="fa fa-user"></span>
-               </a>
+                if (isset($_SESSION['id'])) {
+                          $id = $_SESSION['id'];
+                    // $q = "SELECT * FROM `user_cart`
+                    //       LEFT JOIN `users_wishlist` ON `user_cart.id` = `users_wishlist.id`
+                    //       UNION
+                    //       SELECT * FROM `users_wishlist`
+                    //       RIGHT JOIN `user_cart` ON `users_wishlist.id` = `user_cart.id`";
 
-               <a href="#">
+                         $query = "SELECT Distinct `cart_id` FROM `user_cart` WHERE `userid` = '$id'";
+                         $result = mysqli_query($conn, $query);
+                         $totalCart = mysqli_num_rows($result);
+
+                         // print_r($totalCart);die();
+
+                         $wishlistQuery = "SELECT Distinct `Wishlist_id` FROM `users_wishlist` WHERE `userid` = '$id'";
+                         $wishlistResult = mysqli_query($conn, $wishlistQuery);
+                         $totalWishlist = mysqli_num_rows($wishlistResult);                                 
+
+                         $bell =0;
+                    if (!$userNotLoggedIn) {
+                         echo " 
+                         <a href='#'>
+                              <span class='bell'>$bell</span>
+                              <span class='fa fa-bell'></span>
+                         </a>
+
+                         <a href='http://localhost/project/pages/users/profile.php?data=wishlist'>
+                              <span class='totalWish'>$totalWishlist</span>
+                              <span class='fas fa-heart'></span>
+                         </a>
+
+                         <a href='http://localhost/project/pages/users/profile.php?data=cart'>
+                              <span class='totalCart'>$totalCart</span>
+                              <span class='fa fa-shopping-cart'></span>
+                         </a>
+
+
+                         <a href='http://localhost/project/pages/users/profile.php'>
+                              <span class='fa fa-user'></span>
+                         </a>";
+                    }
+                } else {
+                    echo "";
+                 }
+ ?> 
+              
+
+               <!-- <a href="#">
                     <span class="fa fa-search"></span>
-               </a>
+               </a> -->
           </div>
      </div>
 
