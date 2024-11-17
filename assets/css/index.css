@@ -7,10 +7,11 @@ body{
 }
 
 .main{
-     background-image: url("../img/fashion-slideshow-01.jpg");
+     background-image: url("http://localhost/project/assets/img/home.png");
      background-size: cover;
      background-position: center;
      height: 100vh;
+     background-color: #F9F6F1;
 }
 
 .scrollbar{
@@ -94,4 +95,38 @@ body{
 .look_detail{
      display: flex;
      padding: 10px;
+}
+
+.home-center{
+     display: flex;
+     flex-direction: column;
+     justify-content: top;
+     align-items: center;
+     height: 100vh;
+}
+.home-center h4{
+     margin-top: 100px;
+     font-size: 25px;
+}
+.home-center h1{
+     font-size: 60px;
+     font-weight: 900;
+     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+     color: #464646;
+}
+.home-center h6{
+     margin-top: 20px;
+     font-size: 18px;
+     font-family: "DM Sans", sans-serif;
+}
+.home-center button{
+     margin-top: 30px;
+     padding: 10px 20px;
+     background-color: #0F172A;
+     color: white;
+     border: none;
+     cursor: pointer;
+     font-size: 18px;
+     font-family: Arial, Helvetica, sans-serif;
+     border-radius: 5px;
 }

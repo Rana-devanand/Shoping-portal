@@ -128,7 +128,7 @@
                                    </li>
 
                                    <li class="nav-item">
-                                        <a class="nav-link" href="#">Buy Now</a>
+                                        <a class="nav-link" href="#">Contact-us</a>
                                    </li>
 
                               </ul>

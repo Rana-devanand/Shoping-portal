@@ -22,7 +22,12 @@
 
           <div class="main">
                <div class="row">
-
+                         <div class="home-center">
+                              <h4>NEW COLLECTION</h4>
+                              <h1>The Gift Suite</h1>
+                              <h6>Our latest collection of essential basics.</h6>
+                              <button>Shop Now</button>
+                         </div>
                </div>
           </div>
           <div class="scrollbar">

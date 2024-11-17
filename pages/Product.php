@@ -56,6 +56,69 @@
           justify-content: center;
           align-items: center;
      }
+     .order {
+        margin-top: 30px;
+        /* border: 1px solid #2c8f2c; */
+        text-align: center;
+        background-color: #FB641B;
+        padding: 5px;
+        border-radius: 3%;
+    }
+
+    .order i {
+        color: while;
+        font-size: 20px;
+    }
+
+    .order h4 {
+        color: white;
+        /* font-size: 20px; */
+        font-weight: bold;
+    }
+     .order_detail {
+        margin-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: top;
+        text-align: center;
+    }
+
+    .order_detail button {
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 100%;
+    }
+
+    .order_detail i {
+        font-size: 15px;
+        color: white;
+    }
+
+/* --------------------------- */
+
+    .Wishlist {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: center;
+    }
+
+    .Wishlist button {
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid #ccc;
+        padding: 8px;
+        border-radius: 100%;
+    }
+
+    .Wishlist i {
+        font-size: 15px;
+        color: red;
+    }
+
 </style>
 
 
@@ -101,6 +164,15 @@
 
                          // Set product box content
                          productBox.innerHTML = `
+                <div>
+                         <form class="Wishlist" method="POST" action="http://localhost/project/Database/Add_wishlist.php">
+                              <button type="button" class="wishlist" data-id="${product.id}"> 
+                                   <i class="fas fa-heart"></i>
+                              </button>
+                              <button class="btn btn-lg"><i class="fas fa-share" style="color:black"></i></button
+                        </form>
+               
+                        </div>
                 <img src="${product.image}" alt="${product.title}" class="product-image">
                 <h3 class="product-title">${product.title}</h3>
                 <p class="product-category">Category: ${product.category}</p>
@@ -108,9 +180,17 @@
                 <p class="product-price">Price: $${product.price}</p>
                 <p class="product-rating">Rating: ${product.rating.rate} (${product.rating.count} reviews)</p>
 
-                   <button class="btn btn-lg mt-5 btn-primary">Add to Cart</button>
-                   <button class="btn btn-lg mt-5 btn-success">Share</button>
-                   <button class="btn btn-lg mt-5 btn-dark">Wishlist</button>
+                  <div>
+                          <button class="btn btn-lg mt-5 btn-primary">Add to Cart <i class="fas fa-shopping-cart"></i></button>
+                         <button class="btn btn-lg mt-5 btn-warning">More details  <i class="fas fa-info-circle"></i></button>
+                         
+                  </div>
+                  <div class="order">
+                             <h4 type="button" class="order_detail">
+                                Place Order &nbsp;&nbsp;
+                                <i class="fas fa-shopping-bag"></i>
+                            </h4>
+                    </div>
                   
             `;
 
