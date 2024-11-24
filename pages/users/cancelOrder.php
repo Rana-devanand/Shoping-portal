@@ -3,7 +3,7 @@
      include_once "../../Database/connectivity.php";
 
      $productId = $_GET['id'] ?? "";
-     $query = "UPDATE `order_details` SET `status` = 'Cancelled' WHERE `order_details`.`id` = $productId";
+     $query = "UPDATE `order_details` SET `status` = 'CANCELLED' WHERE `order_details`.`id` = $productId";
      $result = mysqli_query($conn, $query);
      if ($result) {
           echo "<script>alert('Product Cancelled Successfully');</script>";

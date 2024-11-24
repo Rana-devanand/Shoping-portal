@@ -10,28 +10,62 @@
          echo $password;
 
          if (!empty($email) && !empty($password)) {
-             $query = "SELECT * FROM `users` WHERE email = '$email'";
-             $result = mysqli_query($conn, $query);
 
-             if (mysqli_num_rows($result) > 0) {
+           // for user Login
+           $query = "SELECT * FROM `users` WHERE `email` = '$email' AND `type` = 2"; 
+           $result = mysqli_query($conn, $query);
 
-               $user = mysqli_fetch_assoc($result);
+
+          // for Admin login
+             $admin = "SELECT * FROM `users` WHERE `email` = '$email' AND `type` = 1";
+             $adminResult = mysqli_query($conn, $admin);
+
+             if($adminResult){
+               if (mysqli_num_rows($adminResult) > 0) {
+  
+                    $user = mysqli_fetch_assoc($adminResult);
+                   
+     
+                    $hashedPassword = $user['password'];  
+                         if (password_verify($password, $hashedPassword)) {
+                             
+                              $_SESSION['loggedIn'] = true;
+                              $_SESSION['id'] = $user['id'];                            
+     
+                          echo "<script>alert('Admin Logged In Successfully')</script>";
+                          header("Location: ../pages/admin/profile.php");
+                          exit;
+                      } else {
+                         echo "Incorrect password!";
+                      }
+                  } else {
+                      echo "User not found!";
+                  }
               
+             }
+             
+             if($result){
 
-               $hashedPassword = $user['password'];  
-                    if (password_verify($password, $hashedPassword)) {
-                        
-                         $_SESSION['loggedIn'] = true;
-                         $_SESSION['id'] = $user['id'];                            
-
-                     echo "<script>alert('User Logged In Successfully')</script>";
-                     header("Location: ../index.php");
-                     exit;
-                 } else {
-                    echo "Incorrect password!";
-                 }
-             } else {
-                 echo "User not found!";
+               if (mysqli_num_rows($result) > 0) {
+  
+                 $user = mysqli_fetch_assoc($result);
+                
+  
+                 $hashedPassword = $user['password'];  
+                      if (password_verify($password, $hashedPassword)) {
+                          
+                           $_SESSION['loggedIn'] = true;
+                           $_SESSION['id'] = $user['id'];                            
+  
+                       echo "<script>alert('User Logged In Successfully')</script>";
+                       header("Location: ../index.php");
+                       exit;
+                   } else {
+                      echo "Incorrect password!";
+                   }
+               } else {
+                   echo "User not found!";
+               }
              }
          } else {
              echo "Please enter both email and password.";

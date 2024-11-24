@@ -15,11 +15,7 @@
      <link rel="stylesheet" href="http://localhost/project/assets/css/user/profile.css">
      <style>
           /* Basic reset and styling */
-          * {
-               margin: 0;
-               padding: 0;
-               box-sizing: border-box;
-          }
+         
 
           body {
                font-family: Arial, sans-serif;
@@ -155,6 +151,11 @@
           .remove_cart {
                background-color: #28A745;
           }
+          .sidebar a.active {
+               background-color: #007bff;
+               color: #fff;
+               border-radius: 5px;
+          }
      </style>
 </head>
 
@@ -229,22 +230,22 @@
                <h4>shopping </h4>
                <hr>
                <div class="my-wishlist">
-                    <a onclick="showContent('section1')"><i class="fas fa-tachometer-alt">&nbsp;&nbsp; </i>Dashboard</a>
+                    <a onclick="showContent('section1');setActive(this)"><i class="fas fa-tachometer-alt">&nbsp;&nbsp; </i>Dashboard</a>
                </div>
 
                <div class="my-wishlist">
-                    <a onclick="showContent('wishlist')"><i class="fas fa-heart">&nbsp;&nbsp;</i> My wishlist</a>
+                    <a onclick="showContent('wishlist');setActive(this)"><i class="fas fa-heart">&nbsp;&nbsp;</i> My wishlist</a>
                </div>
                <div class="my-cart">
-                    <a onclick="showContent('cart')"><i class="fas fa-shopping-cart">&nbsp;&nbsp;</i>My cart</a>
+                    <a onclick="showContent('cart');setActive(this)"><i class="fas fa-shopping-cart">&nbsp;&nbsp;</i>My cart</a>
                </div>
 
                <div class="My orders">
-                    <a onclick="showContent('myorder')"><i class="fas fa-box">&nbsp;&nbsp;</i>My orders</a>
+                    <a onclick="showContent('myorder');setActive(this)"><i class="fas fa-box">&nbsp;&nbsp;</i>My orders</a>
                </div>
-               <a onclick="showContent('section4')"><i class="fas fa-ban">&nbsp;&nbsp;</i>My cancellation order</a>
-               <a onclick="showContent('section4')"><i class="fas fa-key">&nbsp;&nbsp;</i> Update password</a>
-               <a onclick="showContent('section4')"><i class="fas fa-user-slash">&nbsp;&nbsp;</i>Account Deactivate</a>
+               <a onclick="showContent('section4');setActive(this)"><i class="fas fa-ban">&nbsp;&nbsp;</i>My cancellation order</a>
+               <a onclick="showContent('section4');setActive(this)"><i class="fas fa-key">&nbsp;&nbsp;</i> Update password</a>
+               <a onclick="showContent('section4');setActive(this)"><i class="fas fa-user-slash">&nbsp;&nbsp;</i>Account Deactivate</a>
 
                <a href="./logout.php" class="btn btn-danger"><i class="fas fa-sign-out-alt"></i>&nbsp;&nbsp;Logout</a>
 
@@ -589,7 +590,11 @@
                                                        </div>                                                  
                                                   </td>";
                                         }else if($row['status'] === 'SUCCESS'){
-                                             echo "<td>SUCCESS</td>";
+                                             echo "<td>
+                                                       <div style='background-color:#08CE77; padding:5px;border-radius:3px;height:35px'>
+                                                            <p>Success</p>
+                                                       </div>                                                  
+                                                  </td>";
                                         }
                                         else{
                                              echo "<td>
@@ -599,9 +604,9 @@
                                                   </td>";
                                         }
 
-                                        if($row['status'] === 'Cancelled'){
+                                        if($row['status'] === 'CANCELLED'){
                                              echo "<td>
-                                                   <div style='background-color:#FF5B3D; padding:5px;border-radius:3px;height:35px'>
+                                                   <div style='background-color:#DC3545; padding:5px;border-radius:3px;height:35px'>
                                                             <p>Cancelled</p>
                                                        </div>                                                  
                                                   </td>";
@@ -651,6 +656,20 @@
           }
 
      </script>
+      <script>
+          function setActive(element) {
+               // Remove the 'active' class from all sidebar links
+               const sidebarLinks = document.querySelectorAll('.sidebar a');
+               sidebarLinks.forEach((link) => {
+                    link.classList.remove('active');
+               });
+
+               // Add the 'active' class to the clicked link
+               element.classList.add('active');
+          }
+
+     </script>
+
 
 </body>
 
