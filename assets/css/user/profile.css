@@ -73,5 +73,22 @@
      color: #008000; /* Green color for the price */
      margin-top: 10px;
  }
+ .btn-secondary{
+     background-color: #e69e05;
+     color: #000;
+     border: none;
+     padding: 8px 16px;
+     text-decoration: none;
+     cursor: pointer;
+ }
+ .Cancel{
+     background-color: #ff6347;
+     color: #fff;
+     border: none;
+     padding: 8px 16px;
+     text-decoration: none;
+     cursor: pointer;
+     margin-left: 10px;
+ }
  
  

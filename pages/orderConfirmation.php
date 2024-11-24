@@ -60,17 +60,6 @@ foreach ($data['products'] as $product) {
      }
 }
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify'])) {
-//      $userInput = $_POST['captcha_input'];
-//      if ($userInput === $_SESSION['captcha']) {
-//           echo "<script>alert('CAPTCHA verified! Proceed to order.');</script>";
-//           unset($_SESSION['captcha']); // Reset CAPTCHA after successful verification
-//      } else {
-//           echo "<script>alert('Incorrect CAPTCHA. Please try again.');</script>";
-//           $_SESSION['captcha'] = generateCaptcha(); // Regenerate a new CAPTCHA
-//           $generatedCaptcha = $_SESSION['captcha']; // Update the displayed CAPTCHA
-//      }
-// }
 
 // ------------------------------------------------------------------------------
 // Order Submission Logic
@@ -82,8 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['verify'])) {
       echo "<script>alert('Please confirm you are not a robot.');</script>";
   } elseif ($userInput === $_SESSION['captcha']) { // Case-insensitive comparison
       $query = "INSERT INTO `order_details` 
-                (`productid`, `order_id`, `prod_name`, `prod_img`, `prod_price`, `userid`, `status`) 
-                VALUES ('$productId', '$orderID', '$productName', '$ProductImage', '$ProductTotalPrice', '$userId', 'PENDING')";
+                (`productid`, `order_id`,`prod_name`, `prod_img`, `prod_price`, `userid`, `status`) 
+                VALUES ('$productId', '$orderID','$productName', '$ProductImage', '$ProductTotalPrice', '$userId', 'PENDING')";
       $result = mysqli_query($conn, $query);
 
       if ($result) {

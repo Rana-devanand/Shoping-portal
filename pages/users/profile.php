@@ -161,7 +161,7 @@
 <body>
      <?php include "./userHeader.php" ?>
      <?php
-     session_start();
+     // session_start();
      // Database connection
      include_once "../../Database/connectivity.php";
      if (isset($_SESSION['id'])) {
@@ -214,6 +214,14 @@
 
      }
 
+     // Total order 
+     if (isset($_SESSION['id'])) {
+          $id = $_SESSION['id'];
+          $query = "SELECT * FROM `order_details` WHERE `userid` = '$id'";
+          $result = mysqli_query($conn, $query);
+          $totalOrder = mysqli_num_rows($result);
+     }
+
      ?>
      <div class="profile">
           <!-- Sidebar -->
@@ -264,7 +272,7 @@
                          <a href="#">
                               <div class="order box-container">
                                    <div class="box-detail">
-                                        <h4>0</h4>
+                                        <h4><?php echo $totalOrder ?></h4>
                                         <p>Total Order</p>
                                    </div>
                                    <div class="icon">
@@ -352,7 +360,7 @@
                          <a href="#">
                               <div class="order box-container">
                                    <div class="box-detail">
-                                        <h4>0</h4>
+                                        <h4><?php echo $totalOrder ?></h4>
                                         <p>Total Order</p>
                                    </div>
                                    <div class="icon">
@@ -551,46 +559,73 @@
                          <table class="table table-striped table-bordered">
                               <thead class="table-dark">
                                    <tr>
+                                        <th scope="col">sr.no</th>
+                                        <th scope="col">Image</th>
                                         <th scope="col">Product Name</th>
-                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Order-id</th>
                                         <th scope="col">Price</th>
                                         <th scope="col">Status</th>
-                                        <th scope="col">Total</th>
                                         <th scope="col">Action</th>
+                                        <th scope="col">Order Date</th>
                                    </tr>
                               </thead>
                               <tbody>
-                                   <tr>
-                                        <td>iPhone 12</td>
-                                        <td>1</td>
-                                        <td>$1000</td>
-                                        <td>Pending</td>
-                                        <td>$1000</td>
-                                        <td>
-                                        <button class="btn btn-danger btn-sm">Remove</button>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td>Samsung Galaxy S21</td>
-                                        <td>2</td>
-                                        <td>$800</td>
-                                        <td>Pending</td>
-                                        <td>$1600</td>
-                                        <td>
-                                        <button class="btn btn-danger btn-sm">Remove</button>
-                                        </td>
-                                   </tr>
-                                   <tr>
-                                        <td>Google Pixel 5</td>
-                                        <td>3</td>
-                                        <td>$600</td>
-                                        <td>Pending</td>
-                                        <td>$1800</td>
-                                        <td>
-                                        <button class="btn btn-danger btn-sm">Remove</button>
-                                        </td>
-                                   </tr>
-                              </tbody>
+                              <?php 
+                              if ($totalOrder > 0) {
+                                   $index = 1;
+                                   while ($row = mysqli_fetch_assoc($result)) {
+                                        echo "<tr>";
+                                        echo "<td>". $index++ ."</td>";
+                                        echo "<td>";
+                                        echo "<img src='". $row['prod_img']."' style='height:80px;width:80px;' />";
+                                        echo "</td>";
+                                        echo "<td>".$row['prod_name']."</td>";
+                                        echo "<td>".$row['order_id']."</td>";
+                                        echo "<td>₹".$row['prod_price']."</td>";
+                                        if($row['status'] === 'PENDING'){
+                                             echo "<td>
+                                                       <div style='background-color:#F89C0E; padding:5px;border-radius:3px;height:35px'>
+                                                            <p>Pending</p>
+                                                       </div>                                                  
+                                                  </td>";
+                                        }else if($row['status'] === 'SUCCESS'){
+                                             echo "<td>SUCCESS</td>";
+                                        }
+                                        else{
+                                             echo "<td>
+                                                       <div style='background-color:#FF5B3D; padding:5px;border-radius:3px;height:35px'>
+                                                            <p>Cancelled</p>
+                                                       </div>                                                  
+                                                  </td>";
+                                        }
+
+                                        if($row['status'] === 'Cancelled'){
+                                             echo "<td>
+                                                   <div style='background-color:#FF5B3D; padding:5px;border-radius:3px;height:35px'>
+                                                            <p>Cancelled</p>
+                                                       </div>                                                  
+                                                  </td>";
+                                        }else{
+                                             echo "<td>
+                                             <div style='background-color:#DC3545; padding:5px;border-radius:3px;height:35px'>
+                                                  <a  href='http://localhost/project/pages/users/cancelOrder.php?id=". $row['id'] ."' style='text-decoration:none;color:white; name='cancel'>Cancel</a>
+                                      
+                                             </div>
+                                        </td>";
+
+                                        }
+                                        
+                                        echo "<td>".$row['createdAt']."</td>";
+                                        echo "</tr>";
+                                        ?>
+                                       <?php
+                                   }
+                              } else {
+                                   echo "No order found";
+                              }
+
+                              ?>
+                         </tbody>
                          </table>
                     </div>
                </div>
