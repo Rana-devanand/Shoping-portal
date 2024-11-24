@@ -1,0 +1,160 @@
+     .product-order-details {
+          max-width: 90%;
+          margin: auto;
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          /* display: flex;
+          justify-content: space-between; */
+          margin-top: 10px;
+          text-align: start;
+     }
+     .product-order-details img {
+          width: 200px;
+          height: 200px;
+     }
+     .product-order-details h5{
+          padding: 5px;
+     }
+     .product-order-details b {
+          font-size: 15px;
+          color: Green;
+     }
+     .back{
+          width: 230px;
+          height: 50px;
+          padding: 5px;
+     }
+     .back button{
+          color: white;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          font-size: 15px;
+          border-radius: 5px;
+          outline: none;
+          background-color: burlywood;
+     }
+     
+
+     form {
+          /* border : 1px solid black; */
+          max-width: 90%;
+          margin: auto;
+          background: #fff;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+          display: flex;
+          justify-content: space-between;
+          margin-top: 10px;
+          margin-bottom: 50px;
+     }
+     .form-group{
+          /* border: 1px solid #000; */
+          width: 500px;
+     }
+
+     .form-container h2 {
+          text-align: center;
+          margin-bottom: 20px;
+     }
+
+     .form-container label {
+          display: block;
+          margin-bottom: 5px;
+          font-weight: bold;
+          font-size: 12px;
+          padding: 3px;
+     }
+
+     .form-container input,
+     .form-container select,
+     .form-container textarea {
+          width: 100%;
+          padding: 15px;
+          margin-bottom: 15px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          font-size: 15px;
+     }
+
+     .form-container textarea {
+          resize: vertical;
+     }
+
+     .form-container button {
+          background-color: green;
+          color: white;
+          padding: 10px 15px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          width: 100%;
+          font-size: 16px;
+     }
+
+     .form-container button:hover {
+          background-color: seagreen;
+     }
+
+     .payment-methods {
+          width: 500px;
+          flex-direction: column;
+          /* border : 1px solid #000; */
+     }
+     
+     .payment-method {
+          margin-top: 30px;
+          border: 1px solid #ccc;
+          margin-bottom: 10px;
+          padding: 10px;
+          border-radius: 5px;
+     }
+
+     .payment-methods h3 {
+          text-align: center;
+     }
+
+     .payment-method label {
+          text-align: start;
+     }
+
+     /* Radio button code  */
+     .radio-container {
+          display: flex;
+          gap: 15px;
+          margin-top: 20px;
+     }
+
+     .radio-label {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          padding: 10px 20px;
+          border: 2px solid #ccc;
+          border-radius: 10px;
+          background-color: #fff;
+          cursor: pointer;
+          transition: all 0.3s ease;
+     }
+
+     .radio-label:hover {
+          border-color: #007BFF;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     }
+
+     .radio{
+          display: none;
+     }
+
+     .radio:checked+.radio-label {
+          border-color: #007BFF;
+          background-color: #e6f0ff;
+     }
+
+     .radio-label img {
+          width: 30px;
+          height: 30px;
+     }

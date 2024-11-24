@@ -40,6 +40,7 @@
                background-color: #333;
                color: white;
                padding: 20px;
+               font-size: 14px;
           }
 
           .sidebar h2 {
@@ -150,16 +151,17 @@
                margin-left: 35px;
                opacity: 0.3;
           }
-          .remove_cart{
+
+          .remove_cart {
                background-color: #28A745;
           }
-         
      </style>
 </head>
 
 <body>
      <?php include "./userHeader.php" ?>
      <?php
+     session_start();
      // Database connection
      include_once "../../Database/connectivity.php";
      if (isset($_SESSION['id'])) {
@@ -230,7 +232,7 @@
                </div>
 
                <div class="My orders">
-                    <a onclick="showContent('section3')"><i class="fas fa-box">&nbsp;&nbsp;</i>My orders</a>
+                    <a onclick="showContent('myorder')"><i class="fas fa-box">&nbsp;&nbsp;</i>My orders</a>
                </div>
                <a onclick="showContent('section4')"><i class="fas fa-ban">&nbsp;&nbsp;</i>My cancellation order</a>
                <a onclick="showContent('section4')"><i class="fas fa-key">&nbsp;&nbsp;</i> Update password</a>
@@ -242,11 +244,6 @@
 
           <!-- Main Content -->
           <div class="content" id="content">
-               <span><b>Welcome</b></span>
-               <span><b><?php echo $user ?></b></span><br />
-               <h6>Email : <?php echo $email ?></h6>
-
-
                <div class="box">
                     <div class="box-size">
                          <a href="#">
@@ -546,10 +543,58 @@
                          });
                     }
                     fetchPhoneDetails();
-               } else if (section === 'section4') {
+               } else if (section === 'myorder') {
                     contentHTML = `
-                    <h1>Section 3</h1>
-                    <p>This is the content for Section 3. It is displayed when you click on the "Section 3" link in the sidebar.</p>
+               <div class="container mt-4">
+                    <div class="order_data">
+                         <h4 class="mb-3">Your Order Product:</h4>
+                         <table class="table table-striped table-bordered">
+                              <thead class="table-dark">
+                                   <tr>
+                                        <th scope="col">Product Name</th>
+                                        <th scope="col">Quantity</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Action</th>
+                                   </tr>
+                              </thead>
+                              <tbody>
+                                   <tr>
+                                        <td>iPhone 12</td>
+                                        <td>1</td>
+                                        <td>$1000</td>
+                                        <td>Pending</td>
+                                        <td>$1000</td>
+                                        <td>
+                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>Samsung Galaxy S21</td>
+                                        <td>2</td>
+                                        <td>$800</td>
+                                        <td>Pending</td>
+                                        <td>$1600</td>
+                                        <td>
+                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <td>Google Pixel 5</td>
+                                        <td>3</td>
+                                        <td>$600</td>
+                                        <td>Pending</td>
+                                        <td>$1800</td>
+                                        <td>
+                                        <button class="btn btn-danger btn-sm">Remove</button>
+                                        </td>
+                                   </tr>
+                              </tbody>
+                         </table>
+                    </div>
+               </div>
+
                 `;
                }
 
@@ -566,7 +611,7 @@
           if (category === 'wishlist') {
                showContent('wishlist');
           }
-          else if(category === 'cart'){
+          else if (category === 'cart') {
                showContent('cart');
           }
 

@@ -37,9 +37,12 @@
         padding: 5px;
         border-radius: 3%;
     }
-
+    .order a{
+        color: white;
+        text-decoration: none;
+    }
     .order i {
-        color: while;
+        color: white;
         font-size: 20px;
     }
 
@@ -47,6 +50,7 @@
         color: white;
         /* font-size: 20px; */
         font-weight: bold;
+        text-decoration: none;
     }
 
     .cart {
@@ -79,7 +83,7 @@
             }
         }
     } else {
-        echo "<script>alert('User not logged in');</script>";
+        // echo "<script>alert('User not logged in');</script>";
     }
 
     echo "<script>const userCartIds = " . json_encode($cartIds) . ";</script>";
@@ -174,13 +178,16 @@
                         </div>
                     </form> 
                        <div class="order">
-                             <h4 type="button" class="wishlist">
-                                Place Order
-                                <i class="fas fa-shopping-bag"></i>
-
-                            </h4>
-                       </div>
-                        
+                             <form action="" method="POST">
+                                <a href="http://localhost/project/pages/order.php?id=${phone.id}">
+                                    <h4 type="button">
+                                        Place Order
+                                     <i class="fas fa-shopping-bag"></i>
+                                </h4>
+                                </a>
+                                
+                             </form>
+                       </div> 
                 `;
 
                 phoneContainer.appendChild(phoneItem);

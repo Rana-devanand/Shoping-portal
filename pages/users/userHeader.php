@@ -1,5 +1,20 @@
 <?php
 session_start();
+include_once "../../Database/connectivity.php";
+if(isset($_SESSION['id'])){
+     $id = $_SESSION['id'];
+     $query = "SELECT * from `users` WHERE `id` = '$id'";
+     $result = mysqli_query($conn, $query);
+     if(mysqli_num_rows($result) > 0){
+          $row = mysqli_fetch_assoc($result);
+          $user = $row['username'];
+          $phone = $row['phone'];
+          $email = $row['email'];
+     }
+     else{
+          echo "No user found";
+     }
+}
 
 ?>
 <!DOCTYPE html>
@@ -22,8 +37,9 @@ session_start();
                          <img src="../../assets/img/user.png" alt="user-icon">
                     </div>
                     <div class="user-detail">
-                         <!-- <p>Welcome</p> -->
-                         <h3><?php echo "". $_SESSION["id"] ."" ?></h3>
+                         <span>
+                         <h5><?php echo $user ?></h5></span>
+                         <span><h6><?php echo $email ?></h6></span>
                     </div>
 
                </div>
